@@ -1,37 +1,5 @@
 # TP — Infrastructure as Code avec Terraform et Docker
 
-**Niveau :** débutant à intermédiaire  
-**Durée indicative :** 3 à 4 heures  
-**Technologies :** Terraform, Docker, Nginx, Git, GitHub Actions  
-**Objectif :** décrire, déployer, tester, versionner et supprimer une infrastructure à partir de code.
-
----
-
-## Sommaire
-
-1. [Objectifs pédagogiques](#1-objectifs-pédagogiques)
-2. [Architecture](#2-architecture)
-3. [Prérequis](#3-prérequis)
-4. [Créer la structure du projet](#4-créer-la-structure-du-projet)
-5. [Décrire l'infrastructure avec Terraform](#5-décrire-linfrastructure-avec-terraform)
-6. [Initialiser et valider Terraform](#6-initialiser-et-valider-terraform)
-7. [Planifier et déployer](#7-planifier-et-déployer)
-8. [Tester le serveur Web](#8-tester-le-serveur-web)
-9. [Personnaliser la page Web](#9-personnaliser-la-page-web)
-10. [Créer un réseau Docker dédié](#10-créer-un-réseau-docker-dédié)
-11. [Limiter l'exposition du service](#11-limiter-lexposition-du-service)
-12. [Paramétrer les environnements avec des variables](#12-paramétrer-les-environnements-avec-des-variables)
-13. [Inspecter l'état Terraform](#13-inspecter-létat-terraform)
-14. [Observer une dérive de configuration](#14-observer-une-dérive-de-configuration)
-15. [Versionner avec Git](#15-versionner-avec-git)
-16. [Automatiser avec un Makefile](#16-automatiser-avec-un-makefile)
-17. [Ajouter des contrôles CI](#17-ajouter-des-contrôles-ci)
-18. [Détruire l'infrastructure](#18-détruire-linfrastructure)
-19. [Exercices complémentaires](#19-exercices-complémentaires)
-20. [Questions de compréhension](#20-questions-de-compréhension)
-21. [Grille d'évaluation](#21-grille-dévaluation)
-22. [Dépannage](#22-dépannage)
-
 ---
 
 ## 1. Objectifs pédagogiques
@@ -82,7 +50,7 @@ Installez les outils suivants :
 - [Terraform](https://developer.hashicorp.com/terraform/install)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) ou Docker Engine
 - [Git](https://git-scm.com/downloads) (pour les étapes de versionnement)
-- un éditeur de texte, par exemple Visual Studio Code
+- un éditeur par exemple Visual Studio Code
 
 Vérifiez les installations :
 
