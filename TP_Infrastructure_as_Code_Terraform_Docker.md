@@ -517,8 +517,6 @@ jobs:
 
 Cette pipeline exécute des contrôles de formatage et de validation sur GitHub Actions. Elle n'effectue pas le déploiement Docker, car le runner n'est pas configuré pour piloter le moteur Docker de votre machine.
 
-Pour un usage professionnel, vérifiez les versions des actions, appliquez une politique de mise à jour et configurez les autorisations minimales nécessaires.
-
 ## 18. Détruire l'infrastructure
 
 Quand les tests sont terminés, examinez d'abord les ressources concernées :
@@ -606,18 +604,6 @@ Réalisez les exercices suivants sans consulter immédiatement une correction.
 8. Quelle est la différence entre un contrôle CI et un déploiement CD ?
 9. Pourquoi faut-il examiner le plan avant d'appliquer une modification ?
 10. Quelles précautions faut-il prendre avec les fichiers d'état et les secrets ?
-
-## 21. Grille d'évaluation
-
-| Compétence | Points |
-|---|---:|
-| Fichiers Terraform fonctionnels | 3 |
-| Page Web personnalisée | 2 |
-| Réseau Docker et sécurité | 3 |
-| Variables et état Terraform | 3 |
-| Git et automatisation | 4 |
-| Tests et nettoyage | 5 |
-| **Total** | **20** |
 
 ## 22. Dépannage
 
