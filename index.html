@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Infrastructure as Code - Ulco Calais</title>
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-md bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl p-8 text-white">
+      
+      <!-- Info Banner / Cadre d'informations -->
+        <div class="mb-6 p-4 bg-indigo-500/15 border border-indigo-400/30 rounded-xl flex items-start space-x-3 text-indigo-100 shadow-inner">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-300 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <div class="text-xs leading-relaxed">
+                <span class="font-semibold block text-indigo-200 text-sm mb-0.5">Infrastructure déployée avec Terraform</span>
+                <p>Serveur Nginx exécuté dans Docker.</p>
+                <p>Déploiement géré par Infrastructure as Code.</p>
+            </div>
+        </div>
+
+        <!-- Header Section -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold tracking-tight mb-2">Mon portail Cloud</h1>
+            <p class="text-indigo-200 text-sm">Entrez les details de votre commande ci-dessous.</p>
+        </div>
+
+        <div class="space-y-6">
+            <div>
+                <label for="orderInput" class="block text-sm font-medium text-indigo-200 mb-2">Nom de votre container :</label>
+                <input 
+                    type="text" 
+                    id="orderInput" 
+                    placeholder="Ex: tp-iac-nginx" 
+                    class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-indigo-300/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 shadow-inner"
+                >
+            </div>
+            <div>
+                <label for="orderInput" class="block text-sm font-medium text-indigo-200 mb-2">Port d'exposition :</label>
+                <input 
+                    type="number" 
+                    id="orderInput" 
+                    placeholder="Ex: 8080" 
+                    class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-indigo-300/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 shadow-inner"
+                >
+            </div>
+
+            <button 
+                id="orderButton"
+                class="w-full py-3.5 px-6 bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-600 hover:to-violet-700 active:scale-[0.98] text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/25 transition-all duration-200 flex items-center justify-center space-x-2"
+            >
+                <span>Commander un service Terraform</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </button>
+        </div>
+
+        <div id="notificationBox" class="hidden mt-6 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-emerald-300 text-sm animate-fade-in flex items-start space-x-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <div>
+                <span class="font-semibold block text-emerald-200">Commande enregistrée !</span>
+                <p id="notificationText" class="mt-0.5 text-emerald-300/90"></p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const orderButton = document.getElementById('orderButton');
+            const orderInput = document.getElementById('orderInput');
+            const notificationBox = document.getElementById('notificationBox');
+            const notificationText = document.getElementById('notificationText');
+
+            orderButton.addEventListener('click', () => {
+                const textValue = orderInput.value.trim();
+                const portValue = orderInput.value.trim();
+
+                if (textValue === '' ) {
+                    // Show validation error styling/message gently
+                    orderInput.classList.add('border-rose-500', 'ring-2', 'ring-rose-500/50');
+                    notificationBox.classList.remove('hidden', 'bg-emerald-500/10', 'border-emerald-500/20', 'text-emerald-300');
+                    notificationBox.classList.add('bg-rose-500/10', 'border-rose-500/20', 'text-rose-300');
+                    notificationText.textContent = "Veuillez entrer les paramétres avant de valider.";
+                    
+                    // Remove error styling after typing
+                    orderInput.addEventListener('input', () => {
+                        orderInput.classList.remove('border-rose-500', 'ring-2', 'ring-rose-500/50');
+                    }, { once: true });
+                    return;
+                }
+
+                // Reset error styling if present
+                orderInput.classList.remove('border-rose-500', 'ring-2', 'ring-rose-500/50');
+                
+                // Show success confirmation
+                notificationBox.classList.remove('hidden', 'bg-rose-500/10', 'border-rose-500/20', 'text-rose-300');
+                notificationBox.classList.add('bg-emerald-500/10', 'border-emerald-500/20', 'text-emerald-300');
+                notificationText.textContent = `Votre commande pour le container "${textValue}" sur le port "${textValue}"  a bien été prise en compte.`;
+
+                // Optional: Clear input after submit
+                orderInput.value = '';
+            });
+
+            // Allow pressing Enter key to submit
+            orderInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    orderButton.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
